@@ -15,7 +15,7 @@ export default function Projects({ projects }) {
             <div className="mx-auto max-w-7xl px-4">
                 <h1 className="text-3xl m-4 font-bold sm:text-3xl">WORK</h1>
                 <div className="flex flex-col items-center min-h-screen mb-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 py-10 m-4 gap-4 w-full">
+                    <div className="grid grid-cols-2 md:grid-cols-3 py-10 m-4 gap-4 w-full">
                         {projects.results.map((aProject, index) => (
                             <ProjectItem key={aProject.id} data={aProject} />
                         ))}
