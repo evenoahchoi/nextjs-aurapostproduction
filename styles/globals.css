@@ -1,0 +1,11 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.project-card{
+    @apply flex flex-col m-3 rounded-xl
+    transition duration-300 transform border border-gray-400
+    hover:scale-105 
+    hover:shadow-lg
+    hover:text-gray-500
+}
