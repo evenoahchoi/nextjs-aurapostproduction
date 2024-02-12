@@ -2,6 +2,7 @@ import Layout from "../components/layout";
 import Head from "next/head";
 import { TOKEN, DATABASE_ID } from "../config";
 import ProjectItem from "../components/projects/project-item";
+import { useState } from 'react';
 
 export default function Projects({ projects }) {
 
@@ -17,7 +18,7 @@ export default function Projects({ projects }) {
                 <div className="flex flex-col items-center min-h-screen mb-10">
                     <div className="grid grid-cols-2 md:grid-cols-3 py-5 m-2 gap-4 w-full">
                         {projects.results.map((aProject, index) => (
-                            <ProjectItem key={aProject.id} data={aProject} />
+                            <ProjectItemWithHover key={aProject.id} data={aProject} />
                         ))}
                     </div>
                 </div>
@@ -71,7 +72,7 @@ export async function getServerSideProps() {
             filter: {
                 property: 'Tags', // 태그 속성 필터링
                 multi_select: {
-                    contains: 'Work' // SHOWREEL 태그를 가진 데이터 필터링
+                    contains: 'Work' // WORK 태그를 가진 데이터 필터링
                 }
             },
             sorts: [
