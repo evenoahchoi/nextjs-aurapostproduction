@@ -6,7 +6,7 @@ export default function Footer() {
         <>
             <footer className="text-gray-600 body-font" style={{ backgroundColor: '#494949' }}>
                 <div className="container px-5 py-1 mx-auto flex items-center sm:flex-row flex-col">
-                    <Link legacyBehavior href="/projects">
+                    <Link legacyBehavior href="/showreel">
                         <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                             <Image src="/AURA_LOGO_01_1.png" alt="아우라로고1" width={300} height={300} priority={true} />
                         </a>
