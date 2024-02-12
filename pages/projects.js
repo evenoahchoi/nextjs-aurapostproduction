@@ -26,6 +26,38 @@ export default function Projects({ projects }) {
     );
 }
 
+function ProjectItemWithHover({ data }) {
+    const [showTitle, setShowTitle] = useState(false);
+
+    return (
+        <div
+            className="project-item"
+            onMouseEnter={() => setShowTitle(true)}
+            onMouseLeave={() => setShowTitle(false)}
+        >
+            <ProjectItem data={data} />
+            {showTitle && <div className="title">{data.properties.Name.title[0].plain_text}</div>}
+            <style jsx>{`
+                .project-item {
+                    position: relative;
+                }
+                .title {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background-color: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    padding: 5px;
+                    text-align: center;
+                    transition: opacity 0.3s ease;
+                    opacity: ${showTitle ? '1' : '0'};
+                }
+            `}</style>
+        </div>
+    );
+}
+
 export async function getServerSideProps() {
     const options = {
         method: 'POST',
