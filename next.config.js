@@ -7,7 +7,8 @@ const nextConfig = {
       'images.unsplash.com',
       'prod-files-secure.s3.us-west-2.amazonaws.com',
       'amazonaws.com',
-      's3.us-west-2.amazonaws.com'
+      's3.us-west-2.amazonaws.com',
+      'us-west-2.amazonaws.com'
     ]
   }
 }
