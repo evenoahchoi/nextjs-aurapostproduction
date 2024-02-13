@@ -8,7 +8,8 @@ const nextConfig = {
       'prod-files-secure.s3.us-west-2.amazonaws.com',
       'amazonaws.com',
       's3.us-west-2.amazonaws.com',
-      'us-west-2.amazonaws.com'
+      'us-west-2.amazonaws.com',
+      'i.ibb.co'
     ]
   }
 }
