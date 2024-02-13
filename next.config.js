@@ -9,7 +9,8 @@ const nextConfig = {
       'amazonaws.com',
       's3.us-west-2.amazonaws.com',
       'us-west-2.amazonaws.com',
-      'i.ibb.co'
+      'i.ibb.co',
+      'i.postimg.cc'
     ]
   }
 }
