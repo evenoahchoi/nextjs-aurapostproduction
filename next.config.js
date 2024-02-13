@@ -11,7 +11,8 @@ const nextConfig = {
       'us-west-2.amazonaws.com',
       'i.ibb.co',
       'i.postimg.cc',
-      'postimg.cc'
+      'postimg.cc',
+      'googleusercontent.com'
     ]
   }
 }
