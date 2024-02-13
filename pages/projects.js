@@ -37,7 +37,7 @@ function ProjectItemWithHover({ data }) {
             onMouseLeave={() => setShowTitle(false)}
         >
             <ProjectItem data={data} />
-            {showTitle && <div className="title">{data.properties.Name.title[0].plain_text}</div>}
+            {showTitle && <div className="title">{data.properties.Name.title[0]?.plain_text || ''}</div>}
             <style jsx>{`
                 .project-item {
                     position: relative;
