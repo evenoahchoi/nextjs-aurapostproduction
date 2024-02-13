@@ -116,7 +116,7 @@ function ProjectItemWithHover({ data }) {
     );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const options = {
         method: 'POST',
         headers: {
