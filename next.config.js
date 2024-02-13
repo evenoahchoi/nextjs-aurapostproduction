@@ -12,7 +12,8 @@ const nextConfig = {
       'i.ibb.co',
       'i.postimg.cc',
       'postimg.cc',
-      'googleusercontent.com'
+      'googleusercontent.com',
+      'lh3.googleusercontent.com'
     ]
   }
 }
