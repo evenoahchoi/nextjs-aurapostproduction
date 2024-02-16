@@ -13,7 +13,8 @@ const nextConfig = {
       'i.postimg.cc',
       'postimg.cc',
       'googleusercontent.com',
-      'lh3.googleusercontent.com'
+      'lh3.googleusercontent.com',
+      'postfiles.pstatic.net'
     ]
   }
 }
