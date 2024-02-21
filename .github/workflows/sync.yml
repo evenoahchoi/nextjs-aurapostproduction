@@ -9,16 +9,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
+
+    - name: Sync with Synology NAS
+      uses: appleboy/ssh-action@master
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Deploy to Synology NAS
-      run: |
-        ssh -p 2222 eorkfclsrn@210.90.158.128 'cd /volume1/docker/node/lasttest && sudo git pull origin main'
-
-
-
-
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 2222  # 외부에서 접속할 포트
+        script: |
+          cd /volume1/docker/node/lasttest
+          sudo git pull origin main
