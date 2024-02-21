@@ -12,6 +12,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Set Git safe directory
+      run: git config --global --add safe.directory /volume1/docker/node/lasttest
+
     - name: Sync with Synology NAS
       uses: appleboy/ssh-action@master
       with:
