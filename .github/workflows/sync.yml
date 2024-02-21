@@ -23,4 +23,4 @@ jobs:
           sudo chown -R $(whoami) /volume1/docker/node/lasttest
           sudo chmod -R 755 /volume1/docker/node/lasttest
           cd /volume1/docker/node/lasttest
-          git pull origin main
+          sudo git pull origin main
