@@ -16,7 +16,8 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EXTERNAL_IP }}
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 2222  # 외부에서 접속할 포트
         script: |
           cd /volume1/docker/node/lasttest
