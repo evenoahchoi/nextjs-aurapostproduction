@@ -9,18 +9,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Sync with Synology NAS
-      uses: appleboy/ssh-action@master
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
       with:
-        host: ${{ secrets.EXTERNAL_IP }}
-        username: ${{ secrets.NAS_USER }}
-        key: ${{ secrets.NAS_PASSWORD }}
-        port: 2222  # 외부에서 접속할 포트
-        script: |
-          sudo chown -R $(whoami) /volume1/docker/node/lasttest
-          sudo chmod -R 755 /volume1/docker/node/lasttest
-          cd /volume1/docker/node/lasttest
-          sudo git pull origin main
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Deploy to Synology NAS
+      run: |
+        ssh -p 2222 eorkfclsrn@210.90.158.128 'cd /volume1/docker/node/lasttest && sudo git pull origin main'
+
+
+
+
