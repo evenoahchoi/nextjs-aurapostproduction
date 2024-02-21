@@ -77,18 +77,35 @@ export async function getServerSideProps() {
             },
             sorts: [
                 {
-                    "property": "Date",
-                    "direction": "descending"
+                    property: 'Date',
+                    direction: 'descending'
                 }
             ],
             page_size: 500
         })
     };
 
-    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, options)
-    const projects = await res.json()
+    let projects = [];
+    let hasMore = true;
+    let startCursor = undefined;
+
+    while (hasMore) {
+        if (startCursor) {
+            options.body = JSON.stringify({
+                ...JSON.parse(options.body),
+                start_cursor: startCursor
+            });
+        }
+
+        const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, options);
+        const data = await res.json();
+        projects = projects.concat(data.results);
+
+        hasMore = data.has_more;
+        startCursor = data.next_cursor;
+    }
 
     return {
-        props: { projects },
-    }
+        props: { projects: { results: projects } },
+    };
 }
