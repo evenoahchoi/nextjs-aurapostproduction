@@ -2,22 +2,22 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      'www.notion.so',
-      'images.unsplash.com',
-      'prod-files-secure.s3.us-west-2.amazonaws.com',
-      'amazonaws.com',
-      's3.us-west-2.amazonaws.com',
-      'us-west-2.amazonaws.com',
-      'i.ibb.co',
-      'i.postimg.cc',
-      'postimg.cc',
-      'googleusercontent.com',
-      'lh3.googleusercontent.com',
-      'postfiles.pstatic.net',
-      'blogfiles.pstatic.net'
-    ]
-  }
+    remotePatterns: [
+      { hostname: 'www.notion.so' },
+      { hostname: 'images.unsplash.com' },
+      { hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com' },
+      { hostname: 'amazonaws.com' },
+      { hostname: 's3.us-west-2.amazonaws.com' },
+      { hostname: 'us-west-2.amazonaws.com' },
+      { hostname: 'i.ibb.co' },
+      { hostname: 'i.postimg.cc' },
+      { hostname: 'postimg.cc' },
+      { hostname: 'googleusercontent.com' },
+      { hostname: 'lh3.googleusercontent.com' },
+      { hostname: 'postfiles.pstatic.net' },
+      { hostname: 'blogfiles.pstatic.net' },
+    ],
+  },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
