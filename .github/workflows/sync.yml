@@ -20,5 +20,6 @@ jobs:
         password: ${{ secrets.NAS_PASSWORD }}
         port: 2222  # 외부에서 접속할 포트
         script: |
+          git config --global --add safe.directory /volume1/docker/node/lasttest
           cd /volume1/docker/node/lasttest
           git pull origin main
