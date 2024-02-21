@@ -17,6 +17,7 @@ jobs:
       with:
         host: ${{ secrets.EXTERNAL_IP }}
         username: ${{ secrets.NAS_USER }}
+        password: ${{ secrets.NAS_PASSWORD }}
         port: 2222  # 외부에서 접속할 포트
         script: |
           cd /volume1/docker/node/lasttest
