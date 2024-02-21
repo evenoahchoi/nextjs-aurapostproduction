@@ -22,4 +22,4 @@ jobs:
         port: 2222  # 외부에서 접속할 포트
         script: |
           cd /volume1/docker/node/lasttest
-          sudo git pull origin main
+          git pull origin main
