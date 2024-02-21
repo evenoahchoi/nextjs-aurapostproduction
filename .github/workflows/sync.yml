@@ -20,7 +20,6 @@ jobs:
         key: ${{ secrets.NAS_PASSWORD }}
         port: 2222  # 외부에서 접속할 포트
         script: |
-          whoami
           sudo chown -R $(whoami) /volume1/docker/node/lasttest
           sudo chmod -R 755 /volume1/docker/node/lasttest
           cd /volume1/docker/node/lasttest
