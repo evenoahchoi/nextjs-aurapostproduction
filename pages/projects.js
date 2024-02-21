@@ -81,7 +81,7 @@ export async function getServerSideProps() {
                     "direction": "descending"
                 }
             ],
-            page_size: 100
+            page_size: 500
         })
     };
 
