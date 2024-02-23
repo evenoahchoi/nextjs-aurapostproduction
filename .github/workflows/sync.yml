@@ -27,3 +27,4 @@ jobs:
           git config --global --add safe.directory /volume1/docker/node/lasttest
           cd /volume1/docker/node/lasttest
           git pull origin main
+          sudo npm run build
