@@ -30,4 +30,4 @@ jobs:
           npm install
           npm run build
 
-          docker restart aura-git
+          docker restart aura_git
