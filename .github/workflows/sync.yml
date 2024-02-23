@@ -24,7 +24,10 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 2222  # 외부에서 접속할 포트
         script: |
-          git config --global --add safe.directory /volume1/docker/node/lasttest
+          export PATH=$PATH:/usr/local/bin
           cd /volume1/docker/node/lasttest
-          git pull origin main
-          # npm run build
+          git pull origin master
+          npm install
+          npm run build
+
+          docker restart aura-git
