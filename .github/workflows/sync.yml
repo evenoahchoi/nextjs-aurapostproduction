@@ -9,34 +9,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 'lts/*' # 최신 LTS 버전을 사용합니다.
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set Git safe directory
-        run: git config --global --add safe.directory /volume1/docker/node/lasttest
+    - name: Set Git safe directory
+      run: git config --global --add safe.directory /volume1/docker/node/lasttest
 
-      - name: Install npm dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Sync with Synology NAS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EXTERNAL_IP }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 2222  # 외부에서 접속할 포트
-          script: |
-            git config --global --add safe.directory /volume1/docker/node/lasttest
-            cd /volume1/docker/node/lasttest
-            git pull origin main
-            # NAS에서 Node.js 관련 명령을 실행하기 전에 Node.js와 npm의 올바른 설치를 확인하거나 필요한 경우 설치합니다.
-            npm run build
+    - name: Sync with Synology NAS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EXTERNAL_IP }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 2222  # 외부에서 접속할 포트
+        script: |
+          git config --global --add safe.directory /volume1/docker/node/lasttest
+          cd /volume1/docker/node/lasttest
+          git pull origin main
+          # npm run build
