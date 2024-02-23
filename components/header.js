@@ -11,10 +11,10 @@ export default function Header() {
                     </a>
                 </Link>
                 <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                    <Link legacyBehavior href="/"><a className="mr-5 hover:text-gray-900">ABOUT</a></Link>
-                    <Link legacyBehavior href="/projects"><a className="mr-5 hover:text-gray-900">WORK</a></Link>
-                    <Link legacyBehavior href="/showreel"><a className="mr-5 hover:text-gray-900">SHOWREEL</a></Link>
-                    <Link legacyBehavior href="/contact"><a className="mr-5 hover:text-gray-900">CONTACT</a></Link>
+                    <Link legacyBehavior href="/"><a className="mr-5 hover:text-gray-900 font-bold">ABOUT</a></Link>
+                    <Link legacyBehavior href="/projects"><a className="mr-5 hover:text-gray-900 font-bold">WORK</a></Link>
+                    <Link legacyBehavior href="/showreel"><a className="mr-5 hover:text-gray-900 font-bold">SHOWREEL</a></Link>
+                    <Link legacyBehavior href="/contact"><a className="mr-5 hover:text-gray-900 font-bold">CONTACT</a></Link>
                 </nav>
             </div>
         </header>
