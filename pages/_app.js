@@ -1,3 +1,5 @@
+"use client";
+
 import '../styles/globals.css'
 // 다음 코드는 _app.js 파일 내에 위치해야 합니다.
 import { useState, useEffect } from 'react';
@@ -36,7 +38,7 @@ function MyApp({ Component, pageProps }) {
           }
 
           .spinner > div {
-            background-color: #ffffff;
+            background-color: #000000;
             height: 100%;
             width: 6px;
             display: inline-block;
