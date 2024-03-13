@@ -1,7 +1,6 @@
 "use client";
 
 import '../styles/globals.css'
-// 다음 코드는 _app.js 파일 내에 위치해야 합니다.
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -28,57 +27,29 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-      <style>{`
-          .spinner {
-            margin: 100px auto;
-            width: 50px;
-            height: 40px;
-            text-align: center;
-            font-size: 10px;
+        <style>{`
+          @keyframes shake {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            20% { transform: translateX(-50%) rotate(-10deg); }
+            40% { transform: translateX(-50%) rotate(10deg); }
+            60% { transform: translateX(-50%) rotate(-10deg); }
+            80% { transform: translateX(-50%) rotate(10deg); }
+            100% { transform: translateX(-50%) rotate(0deg); }
           }
 
-          .spinner > div {
-            background-color: #000000;
-            height: 100%;
-            width: 6px;
-            display: inline-block;
-            margin-left: 2px;
-            border-radius: 8px; /* 모서리를 둥글게 */
-            animation: stretchdelay 1.2s infinite ease-in-out;
-          }
-
-          .spinner .rect2 {
-            animation-delay: -1.1s;
-          }
-
-          .spinner .rect3 {
-            animation-delay: -1.0s;
-          }
-
-          .spinner .rect4 {
-            animation-delay: -0.9s;
-          }
-
-          .spinner .rect5 {
-            animation-delay: -0.8s;
-          }
-
-          @keyframes stretchdelay {
-            0%, 40%, 100% { transform: scaleY(0.4); }  
-            20% { transform: scaleY(1.0); }
+          .aura-loading {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            font-weight: bold;
+            animation: shake 2s infinite;
           }
         `}</style>
       </Head>
       {loading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="spinner">
-            <div className="rect1"></div>
-            <div className="rect2"></div>
-            <div className="rect3"></div>
-            <div className="rect4"></div>
-            <div className="rect5"></div>
-          </div>
-        </div>
+        <div className="aura-loading">AURA</div>
       )}
       <Component {...pageProps} />
     </>
