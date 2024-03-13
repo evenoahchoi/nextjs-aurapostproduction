@@ -36,16 +36,29 @@ function MyApp({ Component, pageProps }) {
             80% { transform: translateX(-50%) rotate(10deg); }
             100% { transform: translateX(-50%) rotate(0deg); }
           }
-
+          
           .aura-loading {
             position: absolute;
-            top: 5%;
             left: 50%;
-            transform: translate(-50%, -50%);
             font-size: 40px;
             font-weight: bold;
             animation: shake 2s infinite;
           }
+          
+          @media (max-width: 768px) {
+            .aura-loading {
+              top: 20%;
+              transform: translate(-50%, -50%);
+            }
+          }
+          
+          @media (min-width: 769px) {
+            .aura-loading {
+              top: 5%;
+              transform: translate(-50%, -50%);
+            }
+          }
+          
         `}</style>
       </Head>
       {loading && (
