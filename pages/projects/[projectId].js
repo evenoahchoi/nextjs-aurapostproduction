@@ -13,6 +13,7 @@ export default function ProjectPage() {
                 <title>AuraPostProduction</title>
                 <meta name="description" content="AuraPostProduction" />
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="naver-site-verification" content="780ebce84df4281216f410324d71aea346a1397a" />
             </Head>
             <section className="text-gray-600 body-font relative">
                 <div className="container px-5 py-12 mx-auto flex sm:flex-nowrap flex-wrap">
