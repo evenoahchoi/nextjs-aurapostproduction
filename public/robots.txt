@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://aura-postproduction.com/
+
+# Sitemaps
+Sitemap: https://aura-postproduction.com/sitemap.xml
