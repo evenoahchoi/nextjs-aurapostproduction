@@ -6,8 +6,8 @@ export default function Contact() {
     return(
         <Layout>
             <Head>
-                <title>AuraPostProduction</title>
-                <meta name="description" content="AuraPostProduction" />
+                <title>연락처</title>
+                <meta name="description" content="연락처" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <section className="text-gray-600 body-font relative">

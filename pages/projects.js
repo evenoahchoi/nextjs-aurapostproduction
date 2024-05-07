@@ -9,8 +9,8 @@ export default function Projects({ projects }) {
     return (
         <Layout>
             <Head>
-                <title>AuraPostProduction</title>
-                <meta name="description" content="AuraPostProduction" />
+                <title>WORKS</title>
+                <meta name="description" content="WORKS" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="mx-auto max-w-7xl px-4">
