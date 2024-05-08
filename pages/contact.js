@@ -7,7 +7,7 @@ export default function Contact() {
         <Layout>
             <Head>
                 <title>연락처</title>
-                <meta name="description" content="연락처" />
+                <meta name="description" content="CONTACT" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <section className="text-gray-600 body-font relative">
