@@ -23,8 +23,6 @@ export default function Footer() {
                                     40, Eonju-ro 107-gil, Gangnam-gu, Seoul, Republic of Korea</p>
                         </div>
                         <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-                        <h2 className="title-font font-semibold text-gray-100 tracking-widest text-xs">EMAIL</h2>
-                        <a className="text-gray-300 leading-relaxed">AURA_DI@DAUM.NET</a>
                         <h2 className="title-font font-semibold text-gray-100 tracking-widest text-xs mt-4">TEL</h2>
                         <p className="text-gray-300 leading-relaxed">02-564-4353</p>
                         </div>
