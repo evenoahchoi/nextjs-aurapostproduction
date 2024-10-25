@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player';
 
 export default function ProjectPage() {
     const router = useRouter();
-    const { projectId, title, youtube, description } = router.query;
+    const { title, youtube, description } = router.query;
 
     return (
         <Layout>

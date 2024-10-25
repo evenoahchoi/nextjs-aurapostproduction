@@ -10,13 +10,15 @@
     "sitemapbuild": "next-sitemap"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.15",
     "dotenv": "^16.4.1",
+    "mongodb": "^6.10.0",
     "next": "14.1.0",
     "next-sitemap": "^4.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-lottie-player": "^1.5.6",
-    "react-player": "^2.14.1",
+    "react-player": "^2.11.0",
     "sharp": "^0.33.2"
   },
   "devDependencies": {

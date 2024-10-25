@@ -2,11 +2,11 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 
 export default function ProjectItem({ data }) {
-    const title = data.properties.Name.title[0]?.plain_text || '';
-    const youtube = data.properties.Youtube?.url || '';
-    const description = data.properties.Description.select ? data.properties.Description.select.name : '';
-    const imgSrc = data.cover.file?.url || data.cover.external.url
-    const projectId = data.id;
+    const title = data.properties.Name.title[0]?.plain_text || '';  // 제목
+    const youtube = data.properties.Youtube?.url || '';  // 유튜브 URL
+    const description = data.properties.Description.select ? data.properties.Description.select.name : '';  // 설명
+    const imgSrc = data.cover.external?.url || '';  // 이미지 URL (external에서 가져오기)
+    const projectId = data.id;  // 프로젝트 ID
 
     return (
         <Link legacyBehavior href={`/projects/${encodeURIComponent(projectId)}?title=${encodeURIComponent(title)}&youtube=${encodeURIComponent(youtube)}&description=${encodeURIComponent(description)}`}>
