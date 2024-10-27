@@ -114,7 +114,7 @@ export default function CreatePage() {
                             </select>
                         </div>
                     )}
-                    <button type="submit" className="bg-gradient-to-r from-pink-500 to-orange-500 text-white px-4 py-2 rounded hover:opacity-90 transition duration-200">
+                    <button type="submit" className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-200">
                         추가하기
                     </button>
                 </form>

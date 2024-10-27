@@ -19,6 +19,11 @@ const nextConfig = {
       { hostname: 'www.fashion4you.co.kr' },
     ],
   },
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // 원하는 크기로 설정 (예: 10MB)
+    },
+  },
 }
 
 module.exports = nextConfig;

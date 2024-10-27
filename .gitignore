@@ -15,6 +15,9 @@
 # production
 /build
 
+# 이미지폴더
+/public/images/*
+
 # misc
 .DS_Store
 *.pem
