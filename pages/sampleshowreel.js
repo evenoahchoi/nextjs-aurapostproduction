@@ -15,7 +15,7 @@ export default function Showreel({ projects }) {
     const filteredProjects = selectedTag === 'ALL'
         ? projects // 모든 프로젝트를 보여줌
         : projects.filter((project) =>
-            project.properties.Tags.multi_select.some(tag => tag.name === selectedTag)
+            project.tag1 === selectedTag || project.tag2 === selectedTag
         );
 
     return (
@@ -94,7 +94,7 @@ function ProjectItemWithHover({ data }) {
             onMouseLeave={() => setShowTitle(false)}
         >
             <ProjectItem data={data} />
-            {showTitle && <div className="title">{data.properties.Name.title[0]?.plain_text || 'No Title'}</div>}
+            {showTitle && <div className="title">{data.title || 'No Title'}</div>}
             <style jsx>{`
                 .project-item {
                     position: relative;
@@ -118,10 +118,11 @@ function ProjectItemWithHover({ data }) {
 
 export async function getServerSideProps() {
     const client = await MongoClient.connect(process.env.MONGO_URI);
-    const db = client.db("projects");  // DB 이름: projects
-    const collection = db.collection("post");  // 컬렉션 이름: post
+    const db = client.db("projectstest");  // DB 이름: projects
+    const collection = db.collection("posttest2");  // 컬렉션 이름: post
 
-    const projects = await collection.find({}).sort({ 'properties.Date.date.start': -1 }).toArray(); // 정렬: 최신순
+    // MongoDB에서 모든 프로젝트를 가져오고 최신순으로 정렬
+    const projects = await collection.find({}).sort({ date: -1 }).toArray(); // 'date' 필드를 기준으로 최신순
 
     client.close();
 

@@ -6,9 +6,7 @@ import { useState } from 'react';
 
 export default function Showreel({ projects }) {
     // Work 태그를 가진 프로젝트만 필터링
-    const filteredProjects = projects.filter((project) =>
-        project.properties.Tags.multi_select.some(tag => tag.name === 'Work')
-    );
+    const filteredProjects = projects.filter((project) => project.tag1 === 'Work');
 
     return (
         <Layout>
@@ -23,7 +21,7 @@ export default function Showreel({ projects }) {
                     {/* 프로젝트 목록 */}
                     <div className="grid grid-cols-2 md:grid-cols-3 py-10 m-4 gap-4 w-full">
                         {filteredProjects.map((aProject) => (
-                            <ProjectItemWithHover key={aProject._id} data={aProject} />
+                            <ProjectItemWithHover key={aProject.projectId} data={aProject} />
                         ))}
                     </div>
                 </div>
@@ -59,7 +57,7 @@ function ProjectItemWithHover({ data }) {
             onMouseLeave={() => setShowTitle(false)}
         >
             <ProjectItem data={data} />
-            {showTitle && <div className="title">{data.properties.Name.title[0]?.plain_text || 'No Title'}</div>}
+            {showTitle && <div className="title">{data.title || 'No Title'}</div>}
             <style jsx>{`
                 .project-item {
                     position: relative;
@@ -83,16 +81,18 @@ function ProjectItemWithHover({ data }) {
 
 export async function getServerSideProps() {
     const client = await MongoClient.connect(process.env.MONGO_URI);
-    const db = client.db("projects");  // DB 이름: projects
-    const collection = db.collection("post");  // 컬렉션 이름: post
+    const db = client.db("projectstest");  
+    const collection = db.collection("posttest2");
 
-    // Work 태그가 있는 프로젝트만 조회하고 최신순으로 정렬
     const projects = await collection
-        .find({ "properties.Tags.multi_select.name": "Work" })
-        .sort({ 'properties.Date.date.start': -1 })
+        .find({ tag1: "Work" })
+        .sort({ date: -1 })
         .toArray();
 
     client.close();
+
+    // 로그 추가
+    console.log(projects.map(project => project.date));  // 날짜 확인
 
     return {
         props: { projects: JSON.parse(JSON.stringify(projects)) },

@@ -3,51 +3,61 @@ import Head from "next/head";
 import { MongoClient } from "mongodb";
 import ProjectItem from "../components/projects/project-item";
 import { useState } from 'react';
-import { useRouter } from 'next/router'; // useRouter 가져오기
 
-export default function Projects({ projects }) {
+export default function Showreel({ projects }) {
+    // Work 태그를 가진 프로젝트만 필터링
+    const filteredProjects = projects.filter((project) => project.tag1 === 'Work');
+
     return (
         <Layout>
             <Head>
-                <title>WORKS</title>
-                <meta name="description" content="WORKS" />
+                <title>WORK</title>
+                <meta name="description" content="SHOWREEL" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="mx-auto max-w-7xl px-4">
-                <h1 className="text-3xl m-4 font-bold sm:text-3xl">WORKS</h1>
-                <div className="flex flex-col items-center min-h-screen mb-10">
-                    <div className="grid grid-cols-2 md:grid-cols-3 py-5 m-2 gap-4 w-full">
-                        {projects.map((aProject) => (
-                            <ProjectItemWithHover key={aProject._id} data={aProject} />
+                <h1 className="text-3xl m-4 font-bold sm:text-3xl">WORK</h1>
+                <div className="flex flex-col items-center min-h-screen mb-5 font-bold">
+                    {/* 프로젝트 목록 */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 py-10 m-4 gap-4 w-full">
+                        {filteredProjects.map((aProject) => (
+                            <ProjectItemWithHover key={aProject.projectId} data={aProject} />
                         ))}
                     </div>
                 </div>
             </div>
+            <style jsx>{`
+                .tag-button {
+                    padding: 8px 12px;
+                    font-size: 16px;
+                    color: black;
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+                .tag-button.selected {
+                    color: red;
+                }
+                .tag-button:hover {
+                    color: red;
+                }
+            `}</style>
         </Layout>
     );
 }
 
+// 마우스 오버에 반응하여 title이 나타나는 ProjectItem 컴포넌트
 function ProjectItemWithHover({ data }) {
     const [showTitle, setShowTitle] = useState(false);
-    const router = useRouter(); // useRouter 훅 사용
-
-    // 데이터에서 제목을 가져오는 방법 수정
-    const title = data.title || data.properties?.Name?.title[0]?.plain_text || 'No Title'; // 기본값 추가
-
-    const handleClick = () => {
-        router.push(`/projects/${data._id}`); // 클릭 시 이동할 URL 지정
-    };
 
     return (
         <div
             className="project-item"
             onMouseEnter={() => setShowTitle(true)}
             onMouseLeave={() => setShowTitle(false)}
-            onClick={handleClick} // 클릭 이벤트 추가
-            style={{ cursor: 'pointer' }} // 커서 변경
         >
             <ProjectItem data={data} />
-            {showTitle && <div className="title">{title}</div>}
+            {showTitle && <div className="title">{data.title || 'No Title'}</div>}
             <style jsx>{`
                 .project-item {
                     position: relative;
@@ -71,10 +81,14 @@ function ProjectItemWithHover({ data }) {
 
 export async function getServerSideProps() {
     const client = await MongoClient.connect(process.env.MONGO_URI);
-    const db = client.db("projects");  // DB 이름: projects
-    const collection = db.collection("post");  // 컬렉션 이름: post
+    const db = client.db("projectstest");  // DB 이름: projects
+    const collection = db.collection("posttest2");  // 컬렉션 이름: post
 
-    const projects = await collection.find({}).sort({ Date: -1 }).toArray(); // 정렬: 최신순
+    // tag1이 'Work'인 프로젝트만 조회하고 최신순으로 정렬
+    const projects = await collection
+        .find({ tag1: "Work" })
+        .sort({ date: -1 })
+        .toArray();
 
     client.close();
 
