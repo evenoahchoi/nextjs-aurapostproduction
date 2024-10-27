@@ -12,8 +12,14 @@ export default function LoginPage() {
         e.preventDefault();
     
         // 유저 정보 (하드코딩된 값)
-        const validUsername = process.env.NEXT_PUBLIC_USER_NAME;  //아이디
-        const validPassword = process.env.NEXT_PUBLIC_USER_PASSWORD; //비밀번호
+        const validUsername = process.env.NEXT_PUBLIC_USER_NAME;  // 아이디
+        const validPassword = process.env.NEXT_PUBLIC_USER_PASSWORD; // 비밀번호
+    
+        // 로그로 확인
+        console.log('입력된 아이디:', username);
+        console.log('입력된 비밀번호:', password);
+        console.log('유효한 아이디:', validUsername);
+        console.log('유효한 비밀번호:', validPassword);
     
         if (username === validUsername && password === validPassword) {
             // 로그인 성공
