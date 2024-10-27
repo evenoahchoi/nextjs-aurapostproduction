@@ -1,4 +1,3 @@
-// pages/edit/[editId].js
 import { MongoClient, ObjectId } from 'mongodb';
 import { useState } from 'react';
 import Layout from '../../components/layout';
@@ -53,6 +52,27 @@ export default function EditProject({ project }) {
         }
     };
 
+    // 삭제 처리 함수
+    const handleDelete = async () => {
+        const confirmDelete = confirm('정말로 이 프로젝트를 삭제하시겠습니까?'); // 확인 메시지
+
+        if (confirmDelete) {
+            const res = await fetch(`/api/delete`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: project._id }), // 삭제할 프로젝트 ID
+            });
+
+            if (res.ok) {
+                router.push('/admin'); // 삭제 후 Admin 페이지로 이동
+            } else {
+                console.error('Failed to delete the project.');
+            }
+        }
+    };
+
     return (
         <Layout>
             <div className="container mx-auto px-4 py-8">
@@ -65,7 +85,7 @@ export default function EditProject({ project }) {
                             name="title"
                             value={formData.title}
                             onChange={handleChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                             required
                         />
                     </div>
@@ -76,7 +96,7 @@ export default function EditProject({ project }) {
                             name="youtube"
                             value={formData.youtube}
                             onChange={handleChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                             required
                         />
                     </div>
@@ -86,7 +106,7 @@ export default function EditProject({ project }) {
                             name="description"
                             value={formData.description}
                             onChange={handleChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                             required
                         >
                             <option value="" disabled>설명 선택</option>
@@ -102,7 +122,7 @@ export default function EditProject({ project }) {
                             name="imgSrc"
                             value={formData.imgSrc}
                             onChange={handleChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                             required
                         />
                     </div>
@@ -112,7 +132,7 @@ export default function EditProject({ project }) {
                             name="tag1"
                             value={formData.tag1}
                             onChange={handleChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                             required
                         >
                             <option value="" disabled>Tag 선택</option>
@@ -127,7 +147,7 @@ export default function EditProject({ project }) {
                                 name="tag2"
                                 value={formData.tag2}
                                 onChange={handleChange}
-                                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                                 required
                             >
                                 <option value="" disabled>Tag 2 선택</option>
@@ -144,13 +164,18 @@ export default function EditProject({ project }) {
                             onChange={handleDateChange}
                             showTimeSelect
                             dateFormat="Pp"
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
                             required
                         />
                     </div>
-                    <button type="submit" className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-200">
-                        저장
-                    </button>
+                    <div className="flex justify-between mt-4">
+                        <button type="submit" className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-200">
+                            저장
+                        </button>
+                        <button onClick={handleDelete} className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition duration-200">
+                            삭제
+                        </button>
+                    </div>
                 </form>
             </div>
         </Layout>

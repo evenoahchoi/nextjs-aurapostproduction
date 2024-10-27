@@ -16,6 +16,7 @@ const nextConfig = {
       { hostname: 'lh3.googleusercontent.com' },
       { hostname: 'postfiles.pstatic.net' },
       { hostname: 'blogfiles.pstatic.net' },
+      { hostname: 'www.fashion4you.co.kr' },
     ],
   },
 }

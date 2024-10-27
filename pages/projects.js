@@ -12,7 +12,7 @@ export default function Showreel({ projects }) {
         <Layout>
             <Head>
                 <title>WORK</title>
-                <meta name="description" content="SHOWREEL" />
+                <meta name="description" content="WORK" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="mx-auto max-w-7xl px-4">
@@ -92,7 +92,7 @@ export async function getServerSideProps() {
     client.close();
 
     // 로그 추가
-    console.log(projects.map(project => project.date));  // 날짜 확인
+    //console.log(projects.map(project => project.date));  // 날짜 확인
 
     return {
         props: { projects: JSON.parse(JSON.stringify(projects)) },

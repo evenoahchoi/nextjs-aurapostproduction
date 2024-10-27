@@ -9,45 +9,29 @@ export default function SamplePage() {
       .then((data) => {
         // 필요한 정보만 필터링
         const filteredData = data.map(item => ({
-          title: item.properties.Name.title[0]?.plain_text || '',
-          youtube: item.properties.Youtube?.url || '',
-          description: item.properties.Description.select ? item.properties.Description.select.name : '',
-          imgSrc: item.cover.external?.url || '',
-          projectId: item.id,  // 프로젝트 ID
-          tag1: item.properties.Tags.multi_select[0]?.name || '',  // 태그를 문자열로 변환
-          tag2: item.properties.Tags.multi_select[1]?.name || '',  // 태그를 문자열로 변환
-          date: item.created_time || null  // 날짜 (null 처리)
+          title: item.title || '',  // title 필드
+          youtube: item.youtube || '',  // youtube 필드
+          description: item.description || '',  // description 필드
+          imgSrc: item.imgSrc || '',  // imgSrc 필드
+          projectId: item.projectId || '',  // projectId 필드
+          tag1: item.tag1 || '',  // tag1 필드
+          tag2: item.tag2 || '',  // tag2 필드
+          date: item.date || null,  // date 필드 (null 처리)
         }));
         setData(filteredData);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch data:', error); // 에러 처리
       });
   }, []);
 
   return (
     <div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {data ? (
+        <pre>{JSON.stringify(data, null, 2)}</pre> // 데이터를 JSON 형태로 출력
+      ) : (
+        <p>Loading...</p> // 데이터 로딩 중 메시지
+      )}
     </div>
   );
 }
-
-
-
-
-
-// import { useEffect, useState } from 'react';
-
-// export default function SamplePage() {
-//   const [data, setData] = useState(null);
-
-//   useEffect(() => {
-//     fetch('/api/mongodb')
-//       .then((res) => res.json())
-//       .then((data) => setData(data));
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>Sample MongoDB Data</h1>
-//       <pre>{JSON.stringify(data, null, 2)}</pre>
-//     </div>
-//   );
-// }

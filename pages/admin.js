@@ -23,7 +23,7 @@ export default function AdminPage({ projects }) {
         const elapsedTime = currentTime - loginTime; // 경과 시간 (밀리초)
 
         // 10분(600,000ms) 초과 시 로그아웃
-        if (elapsedTime > 600000) {
+        if (elapsedTime > 3600000) {
             localStorage.removeItem('isAuthenticated');
             localStorage.removeItem('loginTime');
             router.push('/login');
@@ -58,7 +58,18 @@ export default function AdminPage({ projects }) {
                         로그아웃
                     </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                {/* 새로운 프로젝트 추가 버튼 */}
+                <div className="mb-4">
+                    <button 
+                        onClick={() => router.push('/create')} // 새로운 데이터 생성 페이지로 이동
+                        className="bg-gradient-to-r from-pink-500 to-orange-500 text-white px-4 py-2 rounded hover:opacity-90 transition duration-200"
+                    >
+                        새로운 작업물 추가
+                    </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                     {projects.map((project) => (
                         <Link key={project._id} href={`/edit/${project._id}`} passHref>
                             <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
