@@ -6,7 +6,8 @@ export default function CreatePage() {
     const router = useRouter();
     const [title, setTitle] = useState('');
     const [youtube, setYoutube] = useState('');
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState(''); // 설명을 선택할 수 있도록 초기화
+    const [customDescription, setCustomDescription] = useState(''); // 사용자 정의 설명을 위한 상태 추가
     const [imgSrc, setImgSrc] = useState('');
     const [tag1, setTag1] = useState('');
     const [tag2, setTag2] = useState('');
@@ -14,6 +15,8 @@ export default function CreatePage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const descriptionToSave = description === 'custom' ? customDescription : description; // 사용자 정의 설명 사용
+
         const res = await fetch('/api/projects', {
             method: 'POST',
             headers: {
@@ -22,7 +25,7 @@ export default function CreatePage() {
             body: JSON.stringify({ 
                 title,
                 youtube,
-                description,
+                description: descriptionToSave, // 설명을 저장
                 imgSrc,
                 tag1,
                 tag2,
@@ -74,7 +77,21 @@ export default function CreatePage() {
                             <option value="DI (Color) – AURA_postproduction">DI (Color) – AURA_postproduction</option>
                             <option value="2D – AURA_postproduction">2D – AURA_postproduction</option>
                             <option value="DI (Color) – AURA_postproduction / 2D – AURA_postproduction">DI (Color) – AURA_postproduction / 2D – AURA_postproduction</option>
+                            <option value="custom">직접 입력</option>
                         </select>
+                        
+                        {description === 'custom' && (
+                            <div className="mt-2">
+                                <label className="block text-sm font-medium text-gray-700">직접 입력</label>
+                                <input
+                                    type="text"
+                                    value={customDescription}
+                                    onChange={(e) => setCustomDescription(e.target.value)}
+                                    placeholder="설명을 직접 입력하세요"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">이미지 URL</label>
@@ -95,7 +112,7 @@ export default function CreatePage() {
                         >
                             <option value="" disabled>Tag 선택</option>
                             <option value="Work">Work</option>
-                            <option value="Showreel">Showreel</option>
+                            <option value="SHOWREEL">Showreel</option>
                         </select>
                     </div>
                     {tag1 === 'Showreel' && (

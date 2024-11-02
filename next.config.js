@@ -17,6 +17,7 @@ const nextConfig = {
       { hostname: 'postfiles.pstatic.net' },
       { hostname: 'blogfiles.pstatic.net' },
       { hostname: 'www.fashion4you.co.kr' },
+      { hostname: 'www.youtube.com' },
     ],
   },
   api: {

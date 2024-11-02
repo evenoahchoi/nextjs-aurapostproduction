@@ -1,4 +1,5 @@
-import { MongoClient, ObjectId } from 'mongodb';
+// pages/edit/[editId].js
+
 import { useState } from 'react';
 import Layout from '../../components/layout';
 import { useRouter } from 'next/router';
@@ -7,14 +8,20 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function EditProject({ project }) {
     const router = useRouter();
+
     const [formData, setFormData] = useState({
         title: project.title || '',
         youtube: project.youtube || '',
-        description: project.description || '',
+        description: ['DI (Color) – AURA_postproduction', '2D – AURA_postproduction', 'DI (Color) – AURA_postproduction / 2D – AURA_postproduction'].includes(project.description)
+            ? project.description
+            : 'custom',
+        customDescription: ['DI (Color) – AURA_postproduction', '2D – AURA_postproduction', 'DI (Color) – AURA_postproduction / 2D – AURA_postproduction'].includes(project.description)
+            ? ''
+            : project.description,  // 직접 입력된 설명 값을 customDescription에 불러오기
         imgSrc: project.imgSrc || '',
         tag1: project.tag1 || '',
         tag2: project.tag2 || '',
-        date: project.date ? new Date(project.date) : new Date(), // 날짜 기본값 설정
+        date: project.date ? new Date(project.date) : new Date(),
     });
 
     const handleChange = (e) => {
@@ -23,11 +30,6 @@ export default function EditProject({ project }) {
             ...prevData,
             [name]: value,
         }));
-
-        // Tag1이 변경될 때 Tag2를 초기화
-        if (name === 'tag1' && value !== 'Showreel') {
-            setFormData((prevData) => ({ ...prevData, tag2: '' }));
-        }
     };
 
     const handleDateChange = (date) => {
@@ -36,25 +38,31 @@ export default function EditProject({ project }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
+        const descriptionToSave = formData.description === 'custom' ? formData.customDescription : formData.description;
+    
         const res = await fetch(`/api/edit`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: project._id, ...formData, date: formData.date.toISOString() }),
+            body: JSON.stringify({
+                id: project._id,
+                ...formData,
+                description: descriptionToSave, // customDescription이 선택된 경우 그 값이 저장됨
+                date: formData.date.toISOString(),
+            }),
         });
-
+    
         if (res.ok) {
-            router.push('/admin'); // 수정 후 Admin 페이지로 이동
+            router.push('/admin');
         } else {
             console.error('Failed to update the project.');
         }
     };
 
-    // 삭제 처리 함수
     const handleDelete = async () => {
-        const confirmDelete = confirm('정말로 이 프로젝트를 삭제하시겠습니까?'); // 확인 메시지
+        const confirmDelete = confirm('정말로 이 프로젝트를 삭제하시겠습니까?');
 
         if (confirmDelete) {
             const res = await fetch(`/api/delete`, {
@@ -62,11 +70,11 @@ export default function EditProject({ project }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: project._id }), // 삭제할 프로젝트 ID
+                body: JSON.stringify({ id: project._id }),
             });
 
             if (res.ok) {
-                router.push('/admin'); // 삭제 후 Admin 페이지로 이동
+                router.push('/admin');
             } else {
                 console.error('Failed to delete the project.');
             }
@@ -107,14 +115,29 @@ export default function EditProject({ project }) {
                             value={formData.description}
                             onChange={handleChange}
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
-                            required
                         >
                             <option value="" disabled>설명 선택</option>
                             <option value="DI (Color) – AURA_postproduction">DI (Color) – AURA_postproduction</option>
                             <option value="2D – AURA_postproduction">2D – AURA_postproduction</option>
                             <option value="DI (Color) – AURA_postproduction / 2D – AURA_postproduction">DI (Color) – AURA_postproduction / 2D – AURA_postproduction</option>
+                            <option value="custom">직접 입력</option>
                         </select>
+                        
+                        {formData.description === 'custom' && (
+                            <div className="mt-2">
+                                <label className="block text-sm font-medium text-gray-700">직접 입력</label>
+                                <input
+                                    type="text"
+                                    name="customDescription"
+                                    value={formData.customDescription}
+                                    onChange={handleChange}
+                                    placeholder="설명을 직접 입력하세요"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-700"
+                                />
+                            </div>
+                        )}
                     </div>
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700">이미지 링크</label>
                         <input
@@ -137,7 +160,7 @@ export default function EditProject({ project }) {
                         >
                             <option value="" disabled>Tag 선택</option>
                             <option value="Work">Work</option>
-                            <option value="Showreel">Showreel</option>
+                            <option value="SHOWREEL">Showreel</option>
                         </select>
                     </div>
                     {formData.tag1 === 'Showreel' && (
@@ -182,25 +205,24 @@ export default function EditProject({ project }) {
     );
 }
 
+// 서버 측에서 MongoDB 연결 설정
 export async function getServerSideProps(context) {
+    const { MongoClient, ObjectId } = await import('mongodb');  // 조건부 import
     const client = await MongoClient.connect(process.env.MONGO_URI);
     const db = client.db("projectstest");
     const collection = db.collection("posttest2");
 
     const { editId } = context.query;
 
-    // ObjectId 유효성 검사
     if (!ObjectId.isValid(editId)) {
-        return { notFound: true }; // 유효하지 않은 ObjectId일 경우 404 페이지로 이동
+        return { notFound: true };
     }
 
     try {
         const project = await collection.findOne({ _id: new ObjectId(editId) });
 
         if (!project) {
-            return {
-                notFound: true, // 프로젝트가 없을 경우 404 페이지로 이동
-            };
+            return { notFound: true };
         }
 
         return {
@@ -210,9 +232,7 @@ export async function getServerSideProps(context) {
         };
     } catch (error) {
         console.error('Error fetching project:', error);
-        return {
-            notFound: true, // 오류 발생 시 404 페이지로 이동
-        };
+        return { notFound: true };
     } finally {
         client.close();
     }
