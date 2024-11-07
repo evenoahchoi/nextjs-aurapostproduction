@@ -5,8 +5,8 @@ export default function ProjectItem({ data }) {
     const title = data.title || '';  // 제목
     const youtube = data.youtube || '';  // 유튜브 URL
     const description = data.description || '';  // 설명
-    const imgSrc = data.imgSrc || '';  // 이미지 URL
-    const projectId = data.projectId;  // 프로젝트 ID
+    const projectId = data._id;  // MongoDB의 ObjectID를 사용
+    const imagePath = `/images/${projectId}.jpg`; // public/images 폴더에서 _id를 파일명으로 사용
 
     return (
         <Link 
@@ -16,7 +16,7 @@ export default function ProjectItem({ data }) {
             <a className="project-card">
                 <Image
                     className="rounded-xl"
-                    src={imgSrc}
+                    src={imagePath}
                     alt="cover image"
                     width="80%"
                     height="50%"

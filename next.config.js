@@ -18,6 +18,7 @@ const nextConfig = {
       { hostname: 'blogfiles.pstatic.net' },
       { hostname: 'www.fashion4you.co.kr' },
       { hostname: 'www.youtube.com' },
+      { hostname: 'aura-postproduction.com' },
     ],
   },
   api: {

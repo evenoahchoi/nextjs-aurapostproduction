@@ -1,3 +1,4 @@
+//pages/sampleprojects.js
 import Layout from "../components/layout";
 import Head from "next/head";
 import { MongoClient } from "mongodb";
@@ -12,7 +13,7 @@ export default function Showreel({ projects }) {
         <Layout>
             <Head>
                 <title>WORK</title>
-                <meta name="description" content="SHOWREEL" />
+                <meta name="description" content="WORK" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="mx-auto max-w-7xl px-4">
@@ -81,10 +82,9 @@ function ProjectItemWithHover({ data }) {
 
 export async function getServerSideProps() {
     const client = await MongoClient.connect(process.env.MONGO_URI);
-    const db = client.db("projectstest");  // DB 이름: projects
-    const collection = db.collection("posttest2");  // 컬렉션 이름: post
+    const db = client.db("projectstest");
+    const collection = db.collection("posttest2");
 
-    // tag1이 'Work'인 프로젝트만 조회하고 최신순으로 정렬
     const projects = await collection
         .find({ tag1: "Work" })
         .sort({ date: -1 })
