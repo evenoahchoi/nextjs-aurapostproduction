@@ -115,7 +115,7 @@ export default function CreatePage() {
                             <option value="SHOWREEL">Showreel</option>
                         </select>
                     </div>
-                    {tag1 === 'Showreel' && (
+                    {tag1 === 'SHOWREEL' && (
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Tag 2</label>
                             <select

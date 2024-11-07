@@ -163,7 +163,7 @@ export default function EditProject({ project }) {
                             <option value="SHOWREEL">Showreel</option>
                         </select>
                     </div>
-                    {formData.tag1 === 'Showreel' && (
+                    {formData.tag1 === 'SHOWREEL' && (
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Tag 2</label>
                             <select
