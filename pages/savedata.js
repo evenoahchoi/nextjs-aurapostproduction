@@ -15,23 +15,25 @@ export default function SaveDataPage() {
         }
         const jsonData = await response.json();
 
-        // 필터링 후 로컬 스토리지에 저장
-        const filteredData = jsonData.map(item => ({
-          title: item.title || '',
-          youtube: item.youtube || '',
-          description: item.description || '',
-          imgSrc: item.imgSrc || '',
-          projectId: item.projectId || '',
-          tag1: item.tag1 || '',
-          tag2: item.tag2 || '',
-          date: item.date || null,
-        }));
+        // 날짜(date) 기준으로 정렬
+        const sortedData = jsonData
+          .map(item => ({
+            title: item.title || '',
+            youtube: item.youtube || '',
+            description: item.description || '',
+            imgSrc: item.imgSrc || '',
+            projectId: item.projectId || '',
+            tag1: item.tag1 || '',
+            tag2: item.tag2 || '',
+            date: item.date ? new Date(item.date) : null,  // 날짜를 Date 객체로 변환
+          }))
+          .sort((a, b) => (a.date > b.date ? -1 : 1));  // 날짜를 기준으로 오름차순 정렬
 
-        // 데이터를 로컬 스토리지에 저장
-        localStorage.setItem('data', JSON.stringify(filteredData));
+        // 필터링 후 로컬 스토리지에 저장
+        localStorage.setItem('data', JSON.stringify(sortedData));
 
         // 서버로 데이터를 전송하여 JSON 파일로 저장
-        await saveData(filteredData);
+        await saveData(sortedData);
 
       } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -92,10 +94,6 @@ export default function SaveDataPage() {
       </p>
 
       {downloadError && <p className="error-message">{downloadError}</p>} {/* 오류 메시지 표시 */}
-
-      <button onClick={downloadData} className="download-button">
-        DB 데이터 다운로드
-      </button>
 
       <style jsx>{`
         .container {
