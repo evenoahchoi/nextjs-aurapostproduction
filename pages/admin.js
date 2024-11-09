@@ -5,40 +5,44 @@ import Image from 'next/legacy/image';
 import Link from 'next/link';
 import Layout from '../components/layout';
 
-export default function AdminPage({ projects, visitors }) {
+export default function AdminPage({ projects }) {
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true); // 로딩 상태 추가
 
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('isAuthenticated');
         const loginTime = localStorage.getItem('loginTime');
-
+        
+        // 인증 상태 및 로그인 시간 확인
         if (!isAuthenticated || !loginTime) {
             router.push('/login');
-            return;
+            return; // 추가적인 로직 실행 방지
         }
-
+        
         const currentTime = Date.now();
-        const elapsedTime = currentTime - loginTime;
+        const elapsedTime = currentTime - loginTime; // 경과 시간 (밀리초)
 
+        // 10분(600,000ms) 초과 시 로그아웃
         if (elapsedTime > 3600000) {
             localStorage.removeItem('isAuthenticated');
             localStorage.removeItem('loginTime');
             router.push('/login');
-            return;
+            return; // 추가적인 로직 실행 방지
         }
 
-        setLoading(false);
+        setLoading(false); // 인증된 경우 로딩 상태를 false로 변경
     }, [router]);
 
     const handleLogout = () => {
+        // 로그아웃 시 localStorage에서 인증 정보 삭제
         localStorage.removeItem('isAuthenticated');
-        localStorage.removeItem('loginTime');
-        router.push('/login');
+        localStorage.removeItem('loginTime'); // 로그인 시간도 삭제
+        router.push('/login'); // 로그인 페이지로 이동
     };
 
+    // 로딩 중이면 아무것도 보여주지 않음
     if (loading) {
-        return null;
+        return null; // 또는 <div>Loading...</div> 같은 간단한 로딩 컴포넌트를 사용할 수 있음
     }
 
     return (
@@ -46,17 +50,7 @@ export default function AdminPage({ projects, visitors }) {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-2xl font-bold">관리자 화면</h1>
-                    <div className="flex items-center space-x-8">
-                        <div className="text-center">
-                            <p className="text-lg font-semibold">일일 방문자 : {visitors.daily}명</p>
-                        </div>
-                        <div className="text-center">
-                            <p className="text-lg font-semibold">월간 방문자 : {visitors.monthly}명</p>
-                        </div>
-                        <div className="text-center">
-                            <p className="text-lg font-semibold">총 방문자 : {visitors.total}명</p>
-                        </div>
-                    </div>
+                    {/* 로그아웃 버튼 */}
                     <button 
                         onClick={handleLogout} 
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200"
@@ -65,9 +59,10 @@ export default function AdminPage({ projects, visitors }) {
                     </button>
                 </div>
 
+                {/* 새로운 프로젝트 추가 버튼 */}
                 <div className="mb-4">
                     <button 
-                        onClick={() => router.push('/create')}
+                        onClick={() => router.push('/create')} // 새로운 데이터 생성 페이지로 이동
                         className="bg-gradient-to-r from-pink-500 to-orange-500 text-white px-4 py-2 rounded hover:opacity-90 transition duration-200"
                     >
                         새로운 작업물 추가
@@ -109,25 +104,14 @@ export default function AdminPage({ projects, visitors }) {
 export async function getServerSideProps() {
     const client = await MongoClient.connect(process.env.MONGO_URI);
     const db = client.db("projectstest");
+    const collection = db.collection("posttest2");
 
-    const projectsCollection = db.collection("posttest2");
-    const projects = await projectsCollection.find({}).sort({ date: -1 }).toArray();
-
-    const visitorsCollection = db.collection("visitors");
-    const totalVisitor = await visitorsCollection.findOne({ type: 'total' });
-    const monthlyVisitor = await visitorsCollection.findOne({ type: 'monthly', month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}` });
-    const dailyVisitor = await visitorsCollection.findOne({ type: 'daily', day: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}` });
-
+    const projects = await collection.find({}).sort({ date: -1 }).toArray();
     client.close();
 
     return {
         props: {
             projects: JSON.parse(JSON.stringify(projects)),
-            visitors: {
-                total: totalVisitor?.count || 0,
-                monthly: monthlyVisitor?.count || 0,
-                daily: dailyVisitor?.count || 0
-            }
         },
     };
 }
