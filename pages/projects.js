@@ -119,7 +119,7 @@ export default function Showreel({ projects }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="mx-auto max-w-7xl px-4">
-                <h1 className="text-3xl m-4 font-bold sm:text-3xl">작업</h1>
+                <h1 className="text-3xl m-4 font-bold sm:text-3xl">WORK</h1>
                 <div className="flex flex-col items-center min-h-screen mb-5 font-bold">
                     {/* 프로젝트 목록 */}
                     <div className="grid grid-cols-2 md:grid-cols-3 py-10 m-4 gap-4 w-full">
