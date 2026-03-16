@@ -23,7 +23,8 @@ jobs:
           set -e
           export PATH=$PATH:/usr/local/bin
           cd /volume1/docker/node/lasttest
-          git pull origin main
+          git fetch origin main
+          git reset --hard origin/main
           docker stop aura_git
           npm install
           npm run build
