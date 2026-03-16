@@ -19,6 +19,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 2222
+        command_timeout: 30m    # ← 이 줄 추가 (기본값 10분)
         script: |
           set -e
           export PATH=$PATH:/usr/local/bin
