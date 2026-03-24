@@ -5,6 +5,8 @@ export default function Terms() {
     return (
         <Layout>
             <Head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>이용약관 - 마이핑(MYPING)</title>
                 <meta name="description" content="마이핑(MYPING) 이용약관" />
                 <link rel="icon" href="/favicon.ico" />

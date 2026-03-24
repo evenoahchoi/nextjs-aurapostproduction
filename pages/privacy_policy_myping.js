@@ -5,6 +5,8 @@ export default function Privacy() {
     return (
         <Layout>
             <Head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>개인정보처리방침 - 마이핑(MYPING)</title>
                 <meta name="description" content="마이핑(MYPING) 개인정보처리방침" />
                 <link rel="icon" href="/favicon.ico" />
