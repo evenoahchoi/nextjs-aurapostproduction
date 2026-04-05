@@ -5,9 +5,8 @@ export default function Privacy() {
     return (
         <Layout>
             <Head>
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>개인정보처리방침 - 마이핑(MYPING)</title>
+                <meta charSet="utf-8" />
                 <meta name="description" content="마이핑(MYPING) 개인정보처리방침" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -21,14 +20,14 @@ export default function Privacy() {
 
                         <div className="prose prose-lg max-w-none">
                             <p className="text-sm text-gray-600 mb-8 text-right">
-                                시행일자: 2026년 3월 23일
+                                시행일자: 2026년 4월 6일
                             </p>
 
                             <section className="mb-8">
                                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">제1조 (목적)</h2>
                                 <p className="text-gray-700 leading-relaxed">
                                     마이핑(MYPING)(이하 &apos;회사&apos;라고 함)은 회사가 제공하는 마이핑(MYPING) 서비스(이하 &apos;서비스&apos;)를 이용하는 개인(이하 &apos;이용자&apos;)의 정보를 안전하게 보호하기 위해, 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률(이하 &apos;정보통신망법&apos;) 등 관련 법령을 준수하며, 서비스 이용자의 개인정보 보호 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침(이하 &apos;본 방침&apos;)을 수립합니다.
-                                    본 서비스는 <strong>별도의 회원가입이나 로그인을 필수적으로 요구하지 않는 익명 기반 서비스</strong>입니다.
+                                    본 서비스는 기본적으로 <strong>익명 이용을 지원</strong>하며, 기기 변경이나 앱 재설치 시 사용자의 데이터를 안전하게 연동 및 복원할 수 있도록 <strong>사용자의 선택에 따라 타사 플랫폼(카카오, 애플)을 통한 소셜 로그인 기능을 제공</strong>합니다.
                                 </p>
                             </section>
 
@@ -64,10 +63,18 @@ export default function Privacy() {
                             <section className="mb-8">
                                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">제5조 (개인정보의 수집 항목)</h2>
                                 <p className="text-gray-700 leading-relaxed mb-4">
-                                    서비스는 회원가입이나 로그인을 통해 성명, 연락처, 이메일 등의 민감한 개인 식별 정보를 수집하지 않습니다. 다만, 서비스의 원활한 제공을 위하여 다음과 같은 정보가 자동으로 수집될 수 있습니다.
+                                    서비스는 원칙적으로 익명 환경을 지원하나, 소셜 로그인을 이용하는 경우와 서비스의 원활한 제공을 위하여 다음과 같은 정보가 수집될 수 있습니다.
                                 </p>
                                 <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                                    <h3 className="font-semibold text-gray-800 mb-2">1. 서비스 이용 과정에서 생성·수집되는 정보</h3>
+                                    <h3 className="font-semibold text-gray-800 mb-2">1. 소셜 로그인 시 수집되는 정보 (선택적 동의)</h3>
+                                    <ul className="list-disc pl-6 text-gray-700 space-y-1">
+                                        <li>카카오 로그인: 카카오 계정(이메일), 닉네임, 프로필 사진</li>
+                                        <li>애플 로그인: 애플이 제공하는 암호화된 유저 식별자, 이메일, 이름</li>
+                                        <li className="text-sm text-gray-500 mt-2">* 수집된 소셜 계정 정보는 오직 유저 식별 및 이전 데이터 복구, 구독 내역 연동 용도로만 사용됩니다.</li>
+                                    </ul>
+                                </div>
+                                <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                                    <h3 className="font-semibold text-gray-800 mb-2">2. 서비스 이용 과정에서 생성·수집되는 정보</h3>
                                     <ul className="list-disc pl-6 text-gray-700 space-y-1">
                                         <li>기기 식별자 (임의로 생성된 익명 UUID)</li>
                                         <li>기기 정보 (OS 버전, 기기 모델명)</li>
@@ -78,7 +85,7 @@ export default function Privacy() {
                                     </ul>
                                 </div>
                                 <div className="bg-gray-50 p-4 rounded-lg">
-                                    <h3 className="font-semibold text-gray-800 mb-2">2. 광고 관련 수집 정보</h3>
+                                    <h3 className="font-semibold text-gray-800 mb-2">3. 광고 관련 수집 정보</h3>
                                     <ul className="list-disc pl-6 text-gray-700 space-y-1">
                                         <li>광고 식별자 (ADID, IDFA)</li>
                                         <li>광고 시청 기록 및 빈도</li>
@@ -91,10 +98,10 @@ export default function Privacy() {
                                 <p className="text-gray-700 leading-relaxed mb-2">회사는 다음과 같은 방법으로 이용자의 개인정보를 수집합니다.</p>
                                 <div className="text-gray-700 leading-relaxed space-y-1">
                                     <p>1. 앱 설치 후 최초 실행 시 기기 식별자 자동 생성 및 수집</p>
-                                    <p>2. 사용자가 앱 내 메뉴를 통해 키워드를 등록하거나 설정을 변경할 때 수집</p>
-                                    <p>3. Firebase 서비스를 통한 자동 수집 방식</p>
-                                    <p>4. Google AdMob 등 광고 플랫폼을 통한 자동 수집 방식</p>
-                                    <p>5. 모바일 애플리케이션 이용 과정에서 자동으로 생성·수집되는 방식</p>
+                                    <p>2. 소셜 로그인(카카오, 애플) 연동 시 해당 제휴사로부터 제공받는 방식</p>
+                                    <p>3. 사용자가 앱 내 메뉴를 통해 키워드를 등록하거나 설정을 변경할 때 수집</p>
+                                    <p>4. Firebase 서비스를 통한 자동 수집 방식</p>
+                                    <p>5. Google AdMob 등 광고 플랫폼 및 스토어 결제 플랫폼을 통한 자동 수집 방식</p>
                                 </div>
                             </section>
 
@@ -102,12 +109,13 @@ export default function Privacy() {
                                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">제7조 (개인정보의 이용)</h2>
                                 <p className="text-gray-700 leading-relaxed mb-2">회사는 수집한 개인정보를 다음 각 호의 경우에 이용합니다.</p>
                                 <div className="text-gray-700 leading-relaxed space-y-1">
-                                    <p>1. 사용자가 등록한 키워드(관심사) 기반의 정보 모니터링 및 푸시 알림 전송 서비스 제공</p>
-                                    <p>2. 익명 기기 식별자를 통한 사용자의 개인화된 설정 데이터 저장 및 동기화</p>
-                                    <p>3. 인앱 결제 상품(프리미엄 기능)의 구매 유효성 검증 및 기능 해제</p>
-                                    <p>4. 맞춤형 광고 전송 및 광고 노출 빈도 제어, 수익 정산 분석</p>
-                                    <p>5. 서비스 품질 향상, 앱 오류 수정 및 사용자 인터페이스 개선을 위한 통계적 분석</p>
-                                    <p>6. 법령 및 서비스 약관을 위반하는 이용에 대한 제재 및 부정 이용 방지</p>
+                                    <p>1. 소셜 로그인을 통한 기기 간 데이터 연동 및 계정 분실 시 복구 지원</p>
+                                    <p>2. 사용자가 등록한 키워드(관심사) 기반의 정보 모니터링 및 푸시 알림 전송 서비스 제공</p>
+                                    <p>3. 익명 기기 식별자를 통한 사용자의 개인화된 설정 데이터 저장 및 동기화</p>
+                                    <p>4. 인앱 결제 상품(프리미엄 기능)의 구매 유효성 검증 및 요금제 기능 해제</p>
+                                    <p>5. 맞춤형 광고 전송 및 광고 노출 빈도 제어, 수익 정산 분석</p>
+                                    <p>6. 서비스 품질 향상, 앱 오류 수정 및 사용자 인터페이스 개선을 위한 통계적 분석</p>
+                                    <p>7. 법령 및 서비스 약관을 위반하는 이용에 대한 제재 및 부정 이용 방지</p>
                                 </div>
                             </section>
 
@@ -343,7 +351,7 @@ export default function Privacy() {
                             </div>
 
                             <div className="mt-8 pt-6 border-t border-gray-200">
-                                <p className="text-sm text-gray-500 text-center">부칙: 본 방침은 2026년 3월 23일부터 시행됩니다.</p>
+                                <p className="text-sm text-gray-500 text-center">부칙: 본 방침은 2026년 4월 6일부터 시행됩니다.</p>
                                 <p className="text-sm text-gray-500 text-center mt-2">본 개인정보처리방침은 관련 법령, 지침 및 내부 운영정책의 변경에 따라 변경될 수 있습니다.</p>
                                 <p className="text-sm text-gray-500 text-center mt-2">© 2026 마이핑(MYPING). All rights reserved.</p>
                             </div>
