@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta name="google-adsense-account" content="ca-pub-8654172572086927" />
         <style>{`
           @keyframes shake {
             0% { transform: translateX(-50%) rotate(0deg); }
