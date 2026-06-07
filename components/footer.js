@@ -25,6 +25,10 @@ export default function Footer() {
                         <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                         <h2 className="title-font font-semibold text-gray-100 tracking-widest text-xs mt-4">TEL</h2>
                         <p className="text-gray-300 leading-relaxed">02-564-4353</p>
+                        <h2 className="title-font font-semibold text-gray-100 tracking-widest text-xs mt-4">SERVICES</h2>
+                        <a href="https://tools.aura-postproduction.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white leading-relaxed text-xs block">
+                            AURA TOOLS
+                        </a>
                         </div>
                     </div>
                     </a>

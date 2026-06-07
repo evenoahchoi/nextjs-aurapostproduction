@@ -15,6 +15,7 @@ export default function Header() {
                     <Link legacyBehavior href="/projects"><a className="mr-5 hover:text-gray-900">WORKS</a></Link>
                     <Link legacyBehavior href="/showreel"><a className="mr-5 hover:text-gray-900">SHOWREEL</a></Link>
                     <Link legacyBehavior href="/contact"><a className="mr-5 hover:text-gray-900">CONTACT</a></Link>
+                    <a href="https://tools.aura-postproduction.com" target="_blank" rel="noopener noreferrer" className="mr-5 hover:text-gray-900">AURA TOOLS</a>
                 </nav>
             </div>
         </header>
