@@ -26,7 +26,16 @@ jobs:
           cd /volume1/docker/node/lasttest
           git fetch origin main
           git reset --hard origin/main
-          docker stop aura_git
           npm install
           npm run build
-          docker start aura_git
+
+          if docker ps -a --format '{{.Names}}' | grep -Fxq aura_git; then
+            if docker ps --format '{{.Names}}' | grep -Fxq aura_git; then
+              docker stop --time 120 aura_git
+            fi
+
+            docker start aura_git
+          else
+            echo "aura_git container not found"
+            exit 1
+          fi
